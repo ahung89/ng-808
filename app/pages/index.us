@@ -23,8 +23,13 @@
         </tr>
       </table>
 
-      <button class="btn btn-primary" ng-click="drumMachine.advanceSequence()">Next</a>
-      <button class="btn" ng-click="drumMachine.reset()">Reset</a>
+      <button class="btn btn-primary" ng-click="drumMachine.advanceSequence()">Next</button>
+      <button class="btn" ng-click="drumMachine.reset()">Reset</button>
+
+      <button class="btn btn-primary" ng-click="drumMachine.play()">Play</button>
+      <button class="btn" ng-click="drumMachine.stop()">Stop</button>
+
+      <input ng-model="drumMachine.clock.tempo"></input>
     </div>
   </body>
 </html>

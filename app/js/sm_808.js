@@ -1,7 +1,7 @@
 var sm808 = angular.module("sm808", [])
 
-.controller("MainController", function ( $scope ) {
-  $scope.drumMachine = new DrumMachine();
+.controller("MainController", function ( $scope, $timeout ) {
+  $scope.drumMachine = new DrumMachine({$timeout: $timeout});
 
   var helpers = {
     toggleLevel: function ( event ) {

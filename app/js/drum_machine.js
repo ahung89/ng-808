@@ -1,4 +1,4 @@
-var DrumMachine = function () {
+var DrumMachine = function ( attributes ) {
   var partNames = [
     "Cymbal",
     "HiHat",
@@ -12,11 +12,16 @@ var DrumMachine = function () {
     "Accent"
   ];
 
+  this.$timeout = attributes.$timeout;
+
   this.parts = _.map( partNames, function ( name ) {
     return new Part({name: name});
   });
 
   this.masterPart = new Part({name: "Master"});
+  this.clock      = new Clock({tempo: 128});
+
+  this.playing = false;
 };
 
 _.extend( DrumMachine.prototype, {
@@ -34,5 +39,25 @@ _.extend( DrumMachine.prototype, {
     _.each( this.parts, function ( part ) {
       part.reset();
     });
+  },
+
+  play: function () {
+    if ( !this.playing ) {
+      this.playing = true;
+
+      this.tick();
+    }
+  },
+
+  stop: function () {
+    this.playing = false;
+  },
+
+  tick: function () {
+    if ( this.playing ) {
+      this.advanceSequence();
+
+      this.$timeout( _.bind(this.tick, this), this.clock.stepLength() );
+    }
   }
 });
