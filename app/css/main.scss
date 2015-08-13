@@ -3,7 +3,12 @@ table.sm-808 {
     width: 3em;
   }
 
+  th.current {
+    border-bottom: 3px red solid;
+  }
+
   td.current {
-    background-color: #F0F0F0;
+    background-color: #FBFBFB;
+    border-bottom: 1px red solid;
   }
 }

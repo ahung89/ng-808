@@ -4,6 +4,7 @@ var Sequence = function ( attributes ) {
   this.numSteps    = attributes.steps || 16;
   this.events      = this.mapLevels(attributes.levels || this.defaultLevels());
   this.currentStep = this.numSteps - 1;
+  this.stepsRange  = _.range( this.numSteps );
 };
 
 _.extend( Sequence.prototype, {

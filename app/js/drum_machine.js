@@ -16,15 +16,13 @@ var DrumMachine = function () {
     return new Part({name: name});
   });
 
-  // TODO: Make this configurable
-  this.steps = 16;
-  this.stepsRange = _.range( this.steps );
-
-  console.log(this.parts);
+  this.masterPart = new Part({name: "Master"});
 };
 
 _.extend( DrumMachine.prototype, {
   advanceSequence: function () {
+    this.masterPart.advanceSequence();
+
     _.each( this.parts, function ( part ) {
       part.advanceSequence();
     });
