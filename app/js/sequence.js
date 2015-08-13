@@ -1,4 +1,6 @@
 var Sequence = function ( attributes ) {
+  attributes = attributes || {};
+
   // Because writing out an array literal with 16
   // elements is boring (and error-prone).
   var defaultLevels = function () {
