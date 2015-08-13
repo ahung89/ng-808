@@ -15,4 +15,10 @@ var DrumMachine = function () {
   this.parts = _.map( partNames, function ( name ) {
     return new Part({name: name});
   });
+
+  // TODO: Make this configurable
+  this.steps = 16;
+  this.stepsRange = _.range( this.steps );
+
+  console.log(this.parts);
 };

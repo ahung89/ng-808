@@ -7,11 +7,19 @@
     <script type="text/javascript" src="<%= js %>"></script>
   </head>
   <body ng-controller="MainController">
-    <h1>SM-808</h1>
-    <hr>
+    <div class="container">
+      <h1>SM-808</h1>
 
-    <ul>
-      <li ng-repeat="item in data">{{ item.name }}, {{ item.color }}</li>
-    </ul>
+      <table class="table" cellspacing="0">
+        <tr>
+          <th>Name</th>
+          <th ng-repeat="i in drumMachine.stepsRange">{{ i + 1 }}</th>
+        </tr>
+        <tr ng-repeat="part in drumMachine.parts">
+          <td>{{ part.name }}</td>
+          <td ng-repeat="event in part.sequence.events">{{ event.level }}</td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>
