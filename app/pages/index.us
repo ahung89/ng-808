@@ -10,7 +10,7 @@
     <div class="container">
       <h1>SM-808</h1>
 
-      <table class="table" cellspacing="0">
+      <table class="table sm-808" cellspacing="0">
         <tr>
           <th>Name</th>
           <th>*</th>
