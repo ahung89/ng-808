@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="sm808">
+  <head>
+    <title><%= pkg.name %></title>
+
+    <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
+    <script type="text/javascript" src="<%= js %>"></script>
+  </head>
+  <body ng-controller="MainController">
+    <h1>SM-808</h1>
+    <hr>
+
+    <ul>
+      <li ng-repeat="item in data">{{ item.name }}, {{ item.color }}</li>
+    </ul>
+  </body>
+</html>
