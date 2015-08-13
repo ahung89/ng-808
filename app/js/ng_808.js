@@ -1,4 +1,4 @@
-var sm808 = angular.module("sm808", [])
+var ng808 = angular.module("ng808", [])
 
 .controller("MainController", function ( $scope, $timeout ) {
   $scope.drumMachine = new DrumMachine({$timeout: $timeout});

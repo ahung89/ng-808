@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="sm808">
+<html ng-app="ng808">
   <head>
     <title><%= pkg.name %></title>
 
@@ -8,9 +8,9 @@
   </head>
   <body ng-controller="MainController">
     <div class="container">
-      <h1>SM-808</h1>
+      <h1>NG-808</h1>
 
-      <table class="table sm-808" cellspacing="0">
+      <table class="table ng-808" cellspacing="0">
         <tr>
           <th>Name</th>
           <th>*</th>
