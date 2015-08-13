@@ -13,11 +13,13 @@
       <table class="table" cellspacing="0">
         <tr>
           <th>Name</th>
+          <th>*</th>
           <th ng-repeat="i in drumMachine.stepsRange">{{ i + 1 }}</th>
         </tr>
         <tr ng-repeat="part in drumMachine.parts">
           <td>{{ part.name }}</td>
-          <td ng-repeat="event in part.sequence.events">{{ event.level }}</td>
+          <td >{{ part.currentEvent.level }}</td>
+          <td ng-repeat="event in part.sequence.events"><span ng-click="toggleLevel(event)">{{ event.level }}</span></td>
         </tr>
       </table>
     </div>
