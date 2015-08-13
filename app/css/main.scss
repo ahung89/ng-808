@@ -7,8 +7,29 @@ table.sm-808 {
     border-bottom: 3px red solid;
   }
 
-  td.current {
-    background-color: #FBFBFB;
-    border-bottom: 1px red solid;
+  td {
+    border-right: 1px #eee dotted;
+
+    &.event-cell {
+      cursor: pointer;
+    }
+
+    &.current {
+      background-color: #FBFBFB;
+      border-bottom: 1px red solid;
+    }
+
+    &.off {
+      background-color: white;
+    }
+
+    &.on {
+      background-color: #E89BA0;
+    }
+
+    &.accent {
+      background-color: #E84A4A;
+    }
   }
+
 }

@@ -19,6 +19,14 @@ var sm808 = angular.module("sm808", [])
       else {
         return "";
       }
+    },
+
+    eventCellClass: function ( part, event, index ) {
+      var base = this.cellClass(part, index);
+
+      var levelDescription = {0: "off", 64: "on", 128: "accent"}[event.level];
+
+      return base + ' ' + levelDescription;
     }
   };
 
