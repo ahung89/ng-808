@@ -3,11 +3,24 @@ var sm808 = angular.module("sm808", [])
 .controller("MainController", function ( $scope ) {
   $scope.drumMachine = new DrumMachine();
 
-  $scope.toggleLevel = function ( event ) {
-    event.level = ( event.level + 64 );
+  var helpers = {
+    toggleLevel: function ( event ) {
+      event.level = ( event.level + 64 );
 
-    if ( event.level > 128 ) {
-      event.level = 0;
+      if ( event.level > 128 ) {
+        event.level = 0;
+      }
+    },
+
+    cellClass: function ( part, index ) {
+      if ( part.sequence.currentStep === index ) {
+        return "current";
+      }
+      else {
+        return "";
+      }
     }
   };
+
+  _.extend( $scope, helpers );
 });

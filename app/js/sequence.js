@@ -3,14 +3,14 @@ var Sequence = function ( attributes ) {
 
   this.numSteps    = attributes.steps || 16;
   this.events      = this.mapLevels(attributes.levels || this.defaultLevels());
-  this.currentStep = 0;
+  this.currentStep = this.numSteps - 1;
 };
 
 _.extend( Sequence.prototype, {
   next: function () {
-    var event = this.events[this.currentStep];
-
     this.currentStep = (this.currentStep + 1) % this.numSteps;
+
+    var event = this.events[this.currentStep];
 
     return event;
   },

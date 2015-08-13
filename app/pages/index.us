@@ -18,8 +18,8 @@
         </tr>
         <tr ng-repeat="part in drumMachine.parts">
           <td>{{ part.name }}</td>
-          <td >{{ part.currentEvent.level }}</td>
-          <td ng-repeat="event in part.sequence.events"><span ng-click="toggleLevel(event)">{{ event.level }}</span></td>
+          <td>{{ part.currentEvent.level }}</td>
+          <td ng-repeat="event in part.sequence.events" class="{{ cellClass(part, $index) }}"><span ng-click="toggleLevel(event)">{{ event.level }}</span></td>
         </tr>
       </table>
 
