@@ -24,6 +24,7 @@
       </table>
 
       <button class="btn btn-primary" ng-click="drumMachine.advanceSequence()">Next</a>
+      <button class="btn" ng-click="drumMachine.reset()">Reset</a>
     </div>
   </body>
 </html>

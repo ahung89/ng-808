@@ -26,5 +26,13 @@ _.extend( DrumMachine.prototype, {
     _.each( this.parts, function ( part ) {
       part.advanceSequence();
     });
+  },
+
+  reset: function () {
+    this.masterPart.reset();
+
+    _.each( this.parts, function ( part ) {
+      part.reset();
+    });
   }
 });

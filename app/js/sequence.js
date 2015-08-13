@@ -3,8 +3,9 @@ var Sequence = function ( attributes ) {
 
   this.numSteps    = attributes.steps || 16;
   this.events      = this.mapLevels(attributes.levels || this.defaultLevels());
-  this.currentStep = this.numSteps - 1;
   this.stepsRange  = _.range( this.numSteps );
+
+  this.reset();
 };
 
 _.extend( Sequence.prototype, {
@@ -14,6 +15,10 @@ _.extend( Sequence.prototype, {
     var event = this.events[this.currentStep];
 
     return event;
+  },
+
+  reset: function () {
+    this.currentStep = this.numSteps - 1;
   },
 
   // Because writing out an array literal with 16
