@@ -22,3 +22,11 @@ var DrumMachine = function () {
 
   console.log(this.parts);
 };
+
+_.extend( DrumMachine.prototype, {
+  advanceSequence: function () {
+    _.each( this.parts, function ( part ) {
+      part.advanceSequence();
+    });
+  }
+});

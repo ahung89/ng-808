@@ -22,6 +22,8 @@
           <td ng-repeat="event in part.sequence.events"><span ng-click="toggleLevel(event)">{{ event.level }}</span></td>
         </tr>
       </table>
+
+      <button class="btn btn-primary" ng-click="drumMachine.advanceSequence()">Next</a>
     </div>
   </body>
 </html>
