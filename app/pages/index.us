@@ -23,13 +23,16 @@
         </tr>
       </table>
 
-      <button class="btn btn-primary" ng-click="drumMachine.advanceSequence()">Next</button>
-      <button class="btn" ng-click="drumMachine.reset()">Reset</button>
+      <form name="controls">
+        <button class="btn btn-primary" ng-click="drumMachine.advanceSequence()">Next</button>
+        <button class="btn" ng-click="drumMachine.reset()">Reset</button>
 
-      <button class="btn btn-primary" ng-click="drumMachine.play()">Play</button>
-      <button class="btn" ng-click="drumMachine.stop()">Stop</button>
+        <button class="btn btn-primary" ng-disabled="!drumMachine.canPlay()" ng-click="drumMachine.play()">Play</button>
+        <button class="btn" ng-disabled="!drumMachine.canStop()" ng-click="drumMachine.stop()">Stop</button>
 
-      <input ng-model="drumMachine.clock.tempo"></input>
+        <input name="tempoInput" type="number" min="10" max="240" ng-model="drumMachine.clock.tempo" ng-model-options="{ updateOn: 'blur' }" integer />
+        <span ng-show="!drumMachine.clock.validTempo()">Please enter a tempo between 10 and 180. You can go up to 240, but please, keep it under 180.</span>
+      </form>
     </div>
   </body>
 </html>

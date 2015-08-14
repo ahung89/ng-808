@@ -54,10 +54,25 @@ _.extend( DrumMachine.prototype, {
   },
 
   tick: function () {
-    if ( this.playing ) {
+    if ( this.shouldAdvance() ) {
       this.advanceSequence();
 
       this.$timeout( _.bind(this.tick, this), this.clock.stepLength() );
     }
+    else {
+      this.stop();
+    }
+  },
+
+  canPlay: function () {
+    return !this.playing && this.clock.validTempo();
+  },
+
+  canStop: function () {
+    return this.shouldAdvance();
+  },
+
+  shouldAdvance: function () {
+    return this.playing && this.clock.validTempo();
   }
 });
