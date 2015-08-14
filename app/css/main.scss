@@ -11,10 +11,10 @@
 table.ng-808 {
   th {
     width: 3em;
-  }
 
-  th.current {
-    border-bottom: 3px red solid;
+    &.current {
+      border-bottom: 3px red solid;
+    }
   }
 
   .event-cell, .seek-cell {
@@ -22,6 +22,10 @@ table.ng-808 {
   }
 
   td {
+    &.part-label {
+      padding-top: 15px;
+    }
+
     &.current {
       background-color: #FBFBFB;
     }
