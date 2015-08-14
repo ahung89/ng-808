@@ -4,8 +4,17 @@ var ng808 = angular.module("ng808", [])
   $scope.drumMachine = new DrumMachine({$timeout: $timeout});
 
   var helpers = {
-    toggleLevel: function ( part, event ) {
-      event.level = ( event.level + 0.5 );
+    toggleLevel: function ( part, event, $event ) {
+      var add;
+
+      if ( $event.shiftKey ) {
+        add = 1.0;
+      }
+      else {
+        add = 0.5;
+      }
+
+      event.level = ( event.level + add );
 
       if ( event.level > 1 ) {
         event.level = 0;

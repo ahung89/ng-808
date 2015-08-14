@@ -52,7 +52,7 @@
         <tr ng-repeat="part in drumMachine.parts" ng-class="lastClass($last)">
           <td class="part-label">{{ part.name }}</td>
           <td><select class="form-control" ng-model="part.sequence.numSteps" ng-options="value as value for value in [2, 4, 8, 16, 32]" /></td>
-          <td ng-repeat="event in part.sequence.fullSequence track by $index" class="event-cell {{ eventCellClass(part, event, $index) }}" ng-click="toggleLevel(part, event)"><span></span></td>
+          <td ng-repeat="event in part.sequence.fullSequence track by $index" class="event-cell {{ eventCellClass(part, event, $index) }}" ng-click="toggleLevel(part, event, $event)"><span></span></td>
         </tr>
       </table>
     </div>
