@@ -21,6 +21,7 @@ describe( 'Sequence', function () {
     describe( "with a shorter length", function () {
       beforeEach( function () {
         this.sequence.numSteps = 12;
+        this.sequence.reset();
       });
 
       it( 'should repeat 12 steps and loop', function () {
