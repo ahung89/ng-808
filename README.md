@@ -1,5 +1,7 @@
 # NG-808
 
+![NG-808 preview](https://texel-monosnap.s3.amazonaws.com/sm-808-redux_2015-08-14_16-25-48.png)
+
 ### What is it?
 
 NG-808 is a drum machine written using Angular.js that runs in your browser.
