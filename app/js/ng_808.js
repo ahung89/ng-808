@@ -69,6 +69,14 @@ var ng808 = angular.module("ng808", [])
 
     dumpSequence: function () {
       console.log( JSON.stringify( this.drumMachine.dumpSequence() ) );
+    },
+
+    triggerPart: function ( part, $event ) {
+      var height  = $($event.currentTarget).outerHeight();
+      var offset  = height - $event.offsetY;
+      var level   = offset / height;
+
+      part.playSample( level );
     }
   };
 

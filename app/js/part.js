@@ -41,7 +41,11 @@ _.extend( Part.prototype, {
       event = this.currentEvent;
     }
 
-    this.sample.play({volume: event.level});
+    this.playSample( event.level );
+  },
+
+  playSample: function ( level ) {
+    this.sample.play({volume: level});
   },
 
   loadSequence: function ( levels ) {
