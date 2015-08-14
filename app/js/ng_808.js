@@ -4,12 +4,14 @@ var ng808 = angular.module("ng808", [])
   $scope.drumMachine = new DrumMachine({$timeout: $timeout});
 
   var helpers = {
-    toggleLevel: function ( event ) {
+    toggleLevel: function ( part, event ) {
       event.level = ( event.level + 0.5 );
 
       if ( event.level > 1 ) {
         event.level = 0;
       }
+
+      part.playEvent( event );
     },
 
     cellClass: function ( part, index ) {

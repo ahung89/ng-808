@@ -10,7 +10,7 @@ var Part = function ( attributes ) {
 _.extend( Part.prototype, {
   advanceSequence: function () {
     this.currentEvent = this.sequence.next();
-    this.playSound();
+    this.playEvent( this.currentEvent );
   },
 
   reset: function () {
@@ -31,9 +31,13 @@ _.extend( Part.prototype, {
     }
   },
 
-  playSound: function () {
-    if ( this.sample ) {
-      this.sample.play({volume: this.currentEvent.level});
+  playEvent: function ( event ) {
+    if ( !this.sample ) { return; }
+
+    if ( typeof(event) === "undefined" ) {
+      event = this.currentEvent;
     }
+
+    this.sample.play({volume: event.level});
   }
 });

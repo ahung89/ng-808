@@ -38,7 +38,7 @@
         <tr ng-repeat="part in drumMachine.parts" ng-class="lastClass($last)">
           <td>{{ part.name }}</td>
           <td>{{ part.currentEvent.level }}</td>
-          <td ng-repeat="event in part.sequence.events" class="event-cell {{ eventCellClass(part, event, $index) }}" ng-click="toggleLevel(event)"><span></span></td>
+          <td ng-repeat="event in part.sequence.events" class="event-cell {{ eventCellClass(part, event, $index) }}" ng-click="toggleLevel(part, event)"><span></span></td>
         </tr>
       </table>
     </div>
