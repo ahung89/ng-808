@@ -29,6 +29,10 @@ var ng808 = angular.module("ng808", [])
       descriptors.push( this.cellClass(part, index) );
       descriptors.push( {0: "off", 0.5: "on", 1: "accent"}[event.level] );
 
+      if ( index >= part.sequence.numSteps ) {
+        descriptors.push( "ghost" );
+      }
+
       return descriptors.join(" ");
     },
 

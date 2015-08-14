@@ -22,14 +22,26 @@ table.ng-808 {
 
     &.off {
       background-color: white;
+
+      &.ghost {
+        background-color: #F3F3F3;
+      }
     }
 
     &.on {
       background-color: #E89BA0;
+
+      &.ghost {
+        background-color: #E0E0E0;
+      }
     }
 
     &.accent {
       background-color: #E84A4A;
+
+      &.ghost {
+        background-color: #A0A0A0;
+      }
     }
   }
 
