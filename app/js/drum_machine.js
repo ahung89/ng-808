@@ -29,12 +29,27 @@ var DrumMachine = function ( attributes ) {
   this.masterPart = new Part({name: "Master"});
   this.clock      = new Clock({tempo: 128});
 
-  this.defaultSequence = {
-    "Kick":    [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0],
-    "OpenHat": [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
-  };
+  this.sequences = {
+    one: {
+      "Kick":    [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0],
+      "OpenHat": [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+    },
 
-  this.loadSequence( this.defaultSequence );
+    two: {
+      "Kick":    [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0],
+      "Clap":    [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0],
+      "Ride":    [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+    },
+
+    three: {
+      "Kick":    [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0],
+      "Rim":     [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+    }
+  }
+
+  this.currentSequence = this.sequences["one"];
+
+  this.updateSequence();
 
   this.playing = false;
 };
@@ -103,7 +118,15 @@ _.extend( DrumMachine.prototype, {
     return this.playing && this.clock.validTempo();
   },
 
+  clearAllSequences: function () {
+    _.each( this.parts, function ( part ) {
+      part.clearSequence();
+    });
+  },
+
   loadSequence: function ( sequence ) {
+    this.clearAllSequences();
+
     _.each( sequence, function ( levels, partName ) {
       var part = this.partsByName[partName];
 
@@ -111,5 +134,9 @@ _.extend( DrumMachine.prototype, {
         part.loadSequence( levels );
       }
     }, this);
+  },
+
+  updateSequence: function () {
+    this.loadSequence( this.currentSequence );
   }
 });

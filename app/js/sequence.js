@@ -34,6 +34,10 @@ _.extend( Sequence.prototype, {
     });
   },
 
+  clear: function () {
+    this.loadSteps( this.defaultLevels() );
+  },
+
   loadSteps: function ( steps ) {
     this.events   = this.mapLevels( steps );
     this.numSteps = this.events.length;

@@ -42,6 +42,15 @@ _.extend( Part.prototype, {
 
   loadSequence: function ( levels ) {
     this.sequence.loadSteps( levels );
+    this.loadCurrentEvent();
+  },
+
+  clearSequence: function () {
+    this.sequence.clear();
+    this.loadCurrentEvent();
+  },
+
+  loadCurrentEvent: function () {
     this.currentEvent = this.sequence.currentEvent();
   }
 });
