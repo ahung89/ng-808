@@ -43,6 +43,15 @@ var ng808 = angular.module("ng808", [])
       else {
         return "";
       }
+    },
+
+    playButtonClass: function () {
+      if ( this.drumMachine.playing ) {
+        return "pause";
+      }
+      else {
+        return "play";
+      }
     }
   };
 

@@ -8,8 +8,12 @@ var Part = function ( attributes ) {
 };
 
 _.extend( Part.prototype, {
-  advanceSequence: function () {
-    this.currentEvent = this.sequence.next();
+  advanceSequence: function ( by ) {
+    this.currentEvent = this.sequence.advanceBy( by );
+  },
+
+  seekTo: function ( n ) {
+    this.currentEvent = this.sequence.seekTo( n );
   },
 
   reset: function () {

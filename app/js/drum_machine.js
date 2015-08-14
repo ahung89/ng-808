@@ -56,16 +56,29 @@ var DrumMachine = function ( attributes ) {
 };
 
 _.extend( DrumMachine.prototype, {
-  advanceSequence: function () {
-    this.masterPart.advanceSequence();
+  advanceSequence: function ( by ) {
+    this.masterPart.advanceSequence( by );
 
     _.each( this.parts, function ( part ) {
-      part.advanceSequence();
+      part.advanceSequence( by );
     });
   },
 
-  advanceAndPlay: function () {
-    this.advanceSequence();
+  seekTo: function ( n ) {
+    this.masterPart.seekTo( n );
+
+    _.each( this.parts, function ( part ) {
+      part.seekTo( n );
+    });
+  },
+
+  advanceAndPlay: function ( by ) {
+    this.advanceSequence( by );
+    this.playCurrent();
+  },
+
+  seekToAndPlay: function ( n ) {
+    this.seekTo( n );
     this.playCurrent();
   },
 
@@ -88,6 +101,9 @@ _.extend( DrumMachine.prototype, {
       this.playing = true;
 
       this.tick();
+    }
+    else {
+      this.pause();
     }
   },
 

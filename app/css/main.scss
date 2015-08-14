@@ -11,11 +11,11 @@ table.ng-808 {
     border-bottom: 3px red solid;
   }
 
-  td {
-    &.event-cell {
-      cursor: pointer;
-    }
+  .event-cell, .seek-cell {
+    cursor: pointer;
+  }
 
+  td {
     &.current {
       background-color: #FBFBFB;
     }

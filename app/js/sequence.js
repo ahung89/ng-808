@@ -21,9 +21,25 @@ var Sequence = function ( attributes ) {
 
 _.extend( Sequence.prototype, {
   next: function () {
-    this.currentStep = (this.currentStep + 1) % this.numSteps;
+    return this.advanceBy(1);
+  },
+
+  previous: function () {
+    return this.advanceBy(-1);
+  },
+
+  advanceBy: function ( n ) {
+    n = n || 1;
+
+    this.currentStep = this.modIndex((this.currentStep + n), this.numSteps);
 
     return this.currentEvent();
+  },
+
+  seekTo: function ( n ) {
+    var diff = n - this.currentStep;
+
+    return this.advanceBy(diff);
   },
 
   reset: function () {
@@ -75,5 +91,12 @@ _.extend( Sequence.prototype, {
     return _.map( _.range(16), function ( i ) {
       return this.eventAt(i);
     }, this);
+  },
+
+  // Workaround for JS incorrect handling of negative
+  // wrapping with the % operator. Hat tip to:
+  // http://javascript.about.com/od/problemsolving/a/modulobug.htm
+  modIndex: function ( index, max ) {
+    return ((index % max) + max) % max;
   }
 });
