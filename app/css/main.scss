@@ -9,11 +9,15 @@
 }
 
 table.ng-808 {
-  th {
-    width: 3em;
+  table-layout: fixed;
 
+  th {
     &.current {
       border-bottom: 3px red solid;
+    }
+
+    &.name-head, &.steps-head {
+      width: 100px;
     }
   }
 

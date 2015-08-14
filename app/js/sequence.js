@@ -1,6 +1,8 @@
 var Sequence = function ( attributes ) {
   attributes = attributes || {};
 
+  this.defaultLength = 32;
+
   Object.defineProperty( this, "numSteps", {
     get: function () {
       return this._numSteps;
@@ -46,16 +48,16 @@ _.extend( Sequence.prototype, {
     this.currentStep = this.numSteps - 1;
   },
 
-  // Because writing out an array literal with 16
+  // Because writing out an array literal with 32
   // elements is boring (and error-prone).
   defaultLevels: function () {
-    return _.map( _.range(16), function () {
+    return _.map( _.range(this.defaultLength), function () {
       return 0;
     });
   },
 
   mapLevels: function ( levels ) {
-    return _.map( _.range(16), function ( i ) {
+    return _.map( _.range(this.defaultLength), function ( i ) {
       var level = levels[i] || 0;
       return new SequenceEvent({level: level});
     });
@@ -88,7 +90,7 @@ _.extend( Sequence.prototype, {
   },
 
   mapFullSequence: function () {
-    return _.map( _.range(16), function ( i ) {
+    return _.map( _.range(this.defaultLength), function ( i ) {
       return this.eventAt(i);
     }, this);
   },
