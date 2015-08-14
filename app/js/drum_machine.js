@@ -91,8 +91,17 @@ _.extend( DrumMachine.prototype, {
     }
   },
 
-  stop: function () {
+  pause: function () {
     this.playing = false;
+  },
+
+  stop: function () {
+    if ( this.playing ) {
+      this.pause();
+    }
+    else {
+      this.reset();
+    }
   },
 
   tick: function () {
@@ -103,7 +112,7 @@ _.extend( DrumMachine.prototype, {
       this.$timeout( _.bind(this.tick, this), this.clock.stepLength() );
     }
     else {
-      this.stop();
+      this.pause();
     }
   },
 
