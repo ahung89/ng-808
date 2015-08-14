@@ -1,5 +1,11 @@
-.controls {
+.controls, .sequence-select {
   margin-top: 20px;
+}
+
+.sequence-select {
+  form {
+    float: right;
+  }
 }
 
 table.ng-808 {
