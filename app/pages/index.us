@@ -8,7 +8,26 @@
   </head>
   <body ng-controller="MainController">
     <div class="container">
-      <h1>NG-808</h1>
+      <div class="row">
+        <div class="col-lg-2">
+          <h1>NG-808</h1>
+        </div>
+        <div class="col-lg-10 controls">
+          <form name="controls" class="form-inline">
+            <fieldset>
+              <button class="btn btn-primary" ng-click="drumMachine.advanceSequence()">Next</button>
+              <button class="btn" ng-click="drumMachine.reset()">Reset</button>
+
+              <button class="btn btn-primary" ng-disabled="!drumMachine.canPlay()" ng-click="drumMachine.play()">Play</button>
+              <button class="btn" ng-disabled="!drumMachine.canStop()" ng-click="drumMachine.stop()">Stop</button>
+
+              <label>Tempo</label>
+              <input class="form-control" name="tempoInput" type="number" min="{{ drumMachine.clock.minTempo }}" max="{{ drumMachine.clock.maxTempo }}" ng-model="drumMachine.clock.tempo" ng-model-options="{ updateOn: 'blur' }" integer />
+              <span ng-show="!drumMachine.clock.validTempo()">Please enter a tempo between 10 and 180. You can go up to 240, but please, keep it under 180.</span>
+            </fieldset>
+          </form>
+        </div>
+      </div>
 
       <table class="table table-bordered ng-808" cellspacing="0">
         <tr>
@@ -22,17 +41,6 @@
           <td ng-repeat="event in part.sequence.events" class="event-cell {{ eventCellClass(part, event, $index) }}" ng-click="toggleLevel(event)"><span></span></td>
         </tr>
       </table>
-
-      <form name="controls">
-        <button class="btn btn-primary" ng-click="drumMachine.advanceSequence()">Next</button>
-        <button class="btn" ng-click="drumMachine.reset()">Reset</button>
-
-        <button class="btn btn-primary" ng-disabled="!drumMachine.canPlay()" ng-click="drumMachine.play()">Play</button>
-        <button class="btn" ng-disabled="!drumMachine.canStop()" ng-click="drumMachine.stop()">Stop</button>
-
-        <input name="tempoInput" type="number" min="{{ drumMachine.clock.minTempo }}" max="{{ drumMachine.clock.maxTempo }}" ng-model="drumMachine.clock.tempo" ng-model-options="{ updateOn: 'blur' }" integer />
-        <span ng-show="!drumMachine.clock.validTempo()">Please enter a tempo between 10 and 180. You can go up to 240, but please, keep it under 180.</span>
-      </form>
     </div>
   </body>
 </html>
