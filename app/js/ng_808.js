@@ -22,11 +22,21 @@ var ng808 = angular.module("ng808", [])
     },
 
     eventCellClass: function ( part, event, index ) {
-      var base = this.cellClass(part, index);
+      var descriptors = [];
 
-      var levelDescription = {0: "off", 64: "on", 128: "accent"}[event.level];
+      descriptors.push( this.cellClass(part, index) );
+      descriptors.push( {0: "off", 64: "on", 128: "accent"}[event.level] );
 
-      return base + ' ' + levelDescription;
+      return descriptors.join(" ");
+    },
+
+    lastClass: function ( last ) {
+      if ( last ) {
+        return "last";
+      }
+      else {
+        return "";
+      }
     }
   };
 
