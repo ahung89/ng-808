@@ -10,7 +10,6 @@ var Part = function ( attributes ) {
 _.extend( Part.prototype, {
   advanceSequence: function () {
     this.currentEvent = this.sequence.next();
-    this.playEvent( this.currentEvent );
   },
 
   reset: function () {
@@ -39,5 +38,10 @@ _.extend( Part.prototype, {
     }
 
     this.sample.play({volume: event.level});
+  },
+
+  loadSequence: function ( levels ) {
+    this.sequence.loadSteps( levels );
+    this.currentEvent = this.sequence.currentEvent();
   }
 });

@@ -39,4 +39,22 @@ describe( 'Sequence', function () {
       });
     });
   });
+
+  describe( ".loadSteps()", function () {
+    var steps = [0, 1, 0.25, 10, 4];
+
+    beforeEach( function () {
+      this.sequence.loadSteps(steps);
+    });
+
+    it( 'should load the sequence and map levels to events', function () {
+      expect( _.map( this.sequence.events, function ( event ) {
+        return event.level;
+      })).toEqual( steps );
+    });
+
+    it( 'should set numSteps based off the imported sequence', function () {
+      expect( this.sequence.numSteps ).toEqual( steps.length );
+    });
+  });
 });

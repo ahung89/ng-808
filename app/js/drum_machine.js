@@ -20,8 +20,21 @@ var DrumMachine = function ( attributes ) {
     return new Part({name: name, sampleName: sampleName});
   });
 
+  this.partsByName = {};
+
+  _.each( this.parts, function ( part ) {
+    this.partsByName[part.name] = part;
+  }, this);
+
   this.masterPart = new Part({name: "Master"});
   this.clock      = new Clock({tempo: 128});
+
+  this.defaultSequence = {
+    "Kick":    [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0],
+    "OpenHat": [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+  };
+
+  this.loadSequence( this.defaultSequence );
 
   this.playing = false;
 };
@@ -32,6 +45,17 @@ _.extend( DrumMachine.prototype, {
 
     _.each( this.parts, function ( part ) {
       part.advanceSequence();
+    });
+  },
+
+  advanceAndPlay: function () {
+    this.advanceSequence();
+    this.playCurrent();
+  },
+
+  playCurrent: function () {
+    _.each( this.parts, function ( part ) {
+      part.playEvent();
     });
   },
 
@@ -57,6 +81,7 @@ _.extend( DrumMachine.prototype, {
 
   tick: function () {
     if ( this.shouldAdvance() ) {
+      this.playCurrent();
       this.advanceSequence();
 
       this.$timeout( _.bind(this.tick, this), this.clock.stepLength() );
@@ -76,5 +101,15 @@ _.extend( DrumMachine.prototype, {
 
   shouldAdvance: function () {
     return this.playing && this.clock.validTempo();
+  },
+
+  loadSequence: function ( sequence ) {
+    _.each( sequence, function ( levels, partName ) {
+      var part = this.partsByName[partName];
+
+      if ( part ) {
+        part.loadSequence( levels );
+      }
+    }, this);
   }
 });

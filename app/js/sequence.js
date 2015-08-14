@@ -1,8 +1,9 @@
 var Sequence = function ( attributes ) {
   attributes = attributes || {};
 
-  this.numSteps    = attributes.steps || 16;
-  this.events      = this.mapLevels(attributes.levels || this.defaultLevels());
+  this.loadSteps( attributes.levels || this.defaultLevels() );
+
+  this.numSteps    = attributes.steps || this.events.length;
   this.stepsRange  = _.range( this.numSteps );
 
   this.reset();
@@ -12,9 +13,7 @@ _.extend( Sequence.prototype, {
   next: function () {
     this.currentStep = (this.currentStep + 1) % this.numSteps;
 
-    var event = this.events[this.currentStep];
-
-    return event;
+    return this.currentEvent();
   },
 
   reset: function () {
@@ -33,5 +32,14 @@ _.extend( Sequence.prototype, {
     return _.map( levels, function ( level ) {
       return new SequenceEvent({level: level});
     });
+  },
+
+  loadSteps: function ( steps ) {
+    this.events   = this.mapLevels( steps );
+    this.numSteps = this.events.length;
+  },
+
+  currentEvent: function () {
+    return this.events[ this.currentStep ];
   }
 });
