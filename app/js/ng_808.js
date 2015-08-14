@@ -5,9 +5,9 @@ var ng808 = angular.module("ng808", [])
 
   var helpers = {
     toggleLevel: function ( event ) {
-      event.level = ( event.level + 64 );
+      event.level = ( event.level + 0.5 );
 
-      if ( event.level > 128 ) {
+      if ( event.level > 1 ) {
         event.level = 0;
       }
     },
@@ -25,7 +25,7 @@ var ng808 = angular.module("ng808", [])
       var descriptors = [];
 
       descriptors.push( this.cellClass(part, index) );
-      descriptors.push( {0: "off", 64: "on", 128: "accent"}[event.level] );
+      descriptors.push( {0: "off", 0.5: "on", 1: "accent"}[event.level] );
 
       return descriptors.join(" ");
     },

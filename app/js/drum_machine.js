@@ -1,21 +1,23 @@
 var DrumMachine = function ( attributes ) {
-  var partNames = [
-    "Cymbal",
-    "HiHat",
-    "Tamb",
-    "Cowbell",
-    "HiTom",
-    "MidTom",
-    "LowTom",
-    "Snare",
-    "Kick",
-    "Accent"
-  ];
+  var partMap = {
+    "Shaker": "shaker",
+    "Kick": "kick_1",
+    "Snare": "snare_1",
+    "LoConga": "lo_conga",
+    "MidConga": "med_conga",
+    "HiConga": "hi_conga",
+    "CowBell": "cowbell",
+    "Rim": "rim",
+    "Clap": "clap",
+    "Ride": "ride",
+    "OpenHat": "open_hat",
+    "ClosedHat": "closed_hat"
+  };
 
   this.$timeout = attributes.$timeout;
 
-  this.parts = _.map( partNames, function ( name ) {
-    return new Part({name: name});
+  this.parts = _.map( partMap, function ( sampleName, name ) {
+    return new Part({name: name, sampleName: sampleName});
   });
 
   this.masterPart = new Part({name: "Master"});
