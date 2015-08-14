@@ -98,5 +98,11 @@ _.extend( Sequence.prototype, {
   // http://javascript.about.com/od/problemsolving/a/modulobug.htm
   modIndex: function ( index, max ) {
     return ((index % max) + max) % max;
+  },
+
+  dump: function () {
+    return _.map( _.range(this.numSteps), function ( i ) {
+      return this.eventAt(i).level;
+    }, this);
   }
 });

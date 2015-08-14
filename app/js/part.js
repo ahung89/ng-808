@@ -56,5 +56,9 @@ _.extend( Part.prototype, {
 
   loadCurrentEvent: function () {
     this.currentEvent = this.sequence.currentEvent();
+  },
+
+  dumpSequence: function () {
+    return this.sequence.dump();
   }
 });

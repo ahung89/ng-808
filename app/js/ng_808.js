@@ -52,6 +52,14 @@ var ng808 = angular.module("ng808", [])
       else {
         return "play";
       }
+    },
+
+    activateDump: function () {
+      this.showDump = true;
+    },
+
+    dumpSequence: function () {
+      console.log( JSON.stringify( this.drumMachine.dumpSequence() ) );
     }
   };
 
