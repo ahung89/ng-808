@@ -24,8 +24,11 @@ var ng808 = angular.module("ng808", [])
     },
 
     cellClass: function ( part, index ) {
-      if ( part.sequence.currentStep === index ) {
+      if ( this.drumMachine.masterPart.sequence.currentStep === index ) {
         return "current";
+      }
+      else if ( part.sequence.currentStep === index ) {
+        return "ghost-current";
       }
       else {
         return "";

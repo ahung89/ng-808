@@ -63,7 +63,11 @@ table.ng-808 {
     }
   }
 
-  tr.last td.current {
+  td.current {
     border-bottom: 1px red solid;
+  }
+
+  td.ghost-current {
+    border-bottom: 2px #808080 solid;
   }
 }
