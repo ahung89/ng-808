@@ -1,4 +1,12 @@
 var Part = function ( attributes ) {
+  Object.defineProperties( this, {
+    currentStep: {
+      get: function () {
+        return this.sequence.currentStep;
+      }
+    }
+  });
+
   this.name       = attributes.name;
   this.sampleName = attributes.sampleName;
   this.sequence   = new Sequence();

@@ -50,7 +50,9 @@ describe( 'Sequence', function () {
     it( 'should load the sequence and map levels to events', function () {
       expect( _.map( this.sequence.events, function ( event ) {
         return event.level;
-      })).toEqual( steps );
+      })).toEqual(
+        steps.concat(_.map( _.range(27), function () { return 0; }))
+      );
     });
 
     it( 'should set numSteps based off the imported sequence', function () {

@@ -30,6 +30,10 @@
 
               <input class="form-control" name="tempoInput" type="number" min="{{ drumMachine.clock.minTempo }}" max="{{ drumMachine.clock.maxTempo }}" ng-model="drumMachine.clock.tempo" ng-model-options="{ updateOn: 'blur' }" integer />
               <label>BPM</label>
+
+              <input class="form-control" name="swingInput" type="number" min="0" max="85" ng-model="drumMachine.clock.swingPercent" ng-model-options="{ updateOn: 'blur' }" integer />
+              <label>Swing %</label>
+
               <span ng-show="!drumMachine.clock.validTempo()">Please enter a tempo between 10 and 240.</span>
             </fieldset>
           </form>

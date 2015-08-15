@@ -108,7 +108,7 @@ _.extend( DrumMachine.prototype, {
       this.playCurrent();
       this.advanceSequence();
 
-      this.$timeout( _.bind(this.tick, this), this.clock.stepLength() );
+      this.$timeout( _.bind(this.tick, this), this.clock.stepLength( this.masterPart.currentStep ) );
     }
     else {
       this.pause();
@@ -134,9 +134,12 @@ _.extend( DrumMachine.prototype, {
   },
 
   loadSequence: function ( sequence ) {
+    this.clock.tempo        = sequence.tempo;
+    this.clock.swingPercent = sequence.swingPercent;
+
     this.clearAllSequences();
 
-    _.each( sequence, function ( levels, partName ) {
+    _.each( sequence.pattern, function ( levels, partName ) {
       var part = this.partsByName[partName];
 
       if ( part ) {
@@ -156,6 +159,10 @@ _.extend( DrumMachine.prototype, {
       dump[ part.name ] = part.dumpSequence();
     }, this);
 
-    return dump;
+    return {
+      tempo: this.clock.tempo,
+      swingPercent: this.clock.swingPercent,
+      pattern: dump
+    };
   }
 });
