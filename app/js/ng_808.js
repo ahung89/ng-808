@@ -45,6 +45,10 @@ var ng808 = angular.module("ng808", [])
         descriptors.push( "ghost" );
       }
 
+      if ( (index % part.sequence.numSteps) == (part.sequence.numSteps - 1) ) {
+        descriptors.push( "end" );
+      }
+
       return descriptors.join(" ");
     },
 

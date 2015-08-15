@@ -38,6 +38,22 @@ table.ng-808 {
       background-color: #FBFBFB;
     }
 
+    &.end {
+      border-right: 2px #919191 solid;
+
+      &.ghost {
+        border-right-color: #D1D1D1;
+
+        &.on {
+          border-right-color: #A3A3A3;
+        }
+
+        &.accent {
+          border-right-color: #616161;
+        }
+      }
+    }
+
     &.off {
       background-color: white;
 
