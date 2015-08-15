@@ -16,8 +16,12 @@ table.ng-808 {
       border-bottom: 3px red solid;
     }
 
-    &.name-head, &.steps-head {
+    &.name-head {
       width: 100px;
+    }
+
+    &.steps-head {
+      width: 75px;
     }
 
     &.seek-cell {
