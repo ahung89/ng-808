@@ -59,9 +59,7 @@ _.extend( Part.prototype, {
   },
 
   activateVisualizer: function ( level ) {
-    console.log('activating');
     if ( this.sample.soundSource ) {
-      console.log('really activating');
       this.bufferOscilloscope.connectStream( this.sample.soundSource );
       this.bufferOscilloscope.level =  level;
     }
