@@ -26,7 +26,7 @@ class Part {
   }
 
   samplePath () {
-    return "samples/" + this.sampleName + ".wav";
+    return `samples/${this.sampleName}.wav`;
   }
 
   initAudio () {
