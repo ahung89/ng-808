@@ -53,7 +53,18 @@ _.extend( Part.prototype, {
   },
 
   playSample: function ( level ) {
-    this.sample.play({volume: level});
+    if ( level > 0 ) {
+      this.sample.play({volume: level, callback: _.bind(_.partial( this.activateVisualizer, level), this)});
+    }
+  },
+
+  activateVisualizer: function ( level ) {
+    console.log('activating');
+    if ( this.sample.soundSource ) {
+      console.log('really activating');
+      this.bufferOscilloscope.connectStream( this.sample.soundSource );
+      this.bufferOscilloscope.level =  level;
+    }
   },
 
   loadSequence: function ( levels ) {
@@ -72,5 +83,10 @@ _.extend( Part.prototype, {
 
   dumpSequence: function () {
     return this.sequence.dump();
+  },
+
+  setupBufferOscilloscope: function ( element ) {
+    this.bufferOscilloscope = new BufferOscilloscope({element: element, sound: this.sample});
+    this.bufferOscilloscope.draw();
   }
 });

@@ -88,4 +88,13 @@ var ng808 = angular.module("ng808", [])
   };
 
   _.extend( $scope, helpers );
+})
+
+.directive( "bufferOscilloscope", function ( $controller ) {
+  return {
+    restrict: "A",
+    link: function ( scope, element ) {
+      scope.part.setupBufferOscilloscope( element );
+    }
+  };
 });
