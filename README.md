@@ -24,7 +24,7 @@ If you'd like to run it yourself, clone this project then run
 $ lineman run
 ```
 
-And navigate to http://localhost:8000/
+And navigate to [http://localhost:8000](http://localhost:8000/)
 
 ### It doesn't work :(
 
