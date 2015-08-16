@@ -22,9 +22,7 @@ _.extend( BufferOscilloscope.prototype, {
       this.dataArray        = new Uint8Array(this.bufferLength);
       this.freqArray        = new Uint8Array(this.bufferLength);
 
-      for ( var i = 0; i < this.scaledBuffer.length; i += 1 ) {
-        this.scaledBuffer[i] = 128;
-      }
+      this.initBuffer( this.scaledBuffer, 128 );
     },
 
     connectStream: function ( stream ) {
@@ -37,8 +35,14 @@ _.extend( BufferOscilloscope.prototype, {
       // Move all the existing values left by one tick
       this.scaledBuffer.copyWithin(0, this.tickWidth);
 
+      this.previousBuffer = _.clone( this.dataArray );
+
       // Copy this window's values to a buffer
       this.analyser.getByteTimeDomainData( this.dataArray );
+
+      if ( this.isDuplicate() ) {
+        this.initBuffer( this.dataArray, 128 );
+      }
 
       // Copy this window's frequency values to another buffer
       this.analyser.getByteFrequencyData( this.freqArray );
@@ -57,9 +61,15 @@ _.extend( BufferOscilloscope.prototype, {
     },
 
     isSilent: function () {
-      return _.all( this.freqArray, function ( f ) {
-        return f === 0;
+      return _.all( this.scaledBuffer, function ( f ) {
+        return (f < 130) && (f > 125);
       });
+    },
+
+    isDuplicate: function () {
+      return _.all( this.dataArray, function ( f, index ) {
+        return f === this.previousBuffer[ index ];
+      }, this);
     },
 
     normalizeAndScale: function ( level, scale ) {
@@ -67,6 +77,12 @@ _.extend( BufferOscilloscope.prototype, {
       var scaled     = normalized * scale;
 
       return scaled + 128;
+    },
+
+    initBuffer: function ( buffer, value ) {
+      for ( var i = 0; i < buffer.length; i += 1 ) {
+        buffer[i] = value;
+      }
     },
 
     draw: function () {
