@@ -1,6 +1,6 @@
 # NG-808
 
-![NG-808 preview](https://texel-monosnap.s3.amazonaws.com/ng-808_2015-08-16_11-37-29.png)
+![NG-808 preview](https://texel-monosnap.s3.amazonaws.com/NG-808_Preview.png)
 
 ### What is it?
 
@@ -24,7 +24,7 @@ If you'd like to run it yourself, clone this project then run
 $ lineman run
 ```
 
-And navigate to http://localhost:8000/
+And navigate to [http://localhost:8000](http://localhost:8000/)
 
 ### It doesn't work :(
 
