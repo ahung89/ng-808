@@ -1,82 +1,75 @@
-var Sequence = function ( attributes ) {
-  attributes = attributes || {};
+class Sequence {
+  constructor ( attributes = {} ) {
+    this.defaultLength = 32;
 
-  this.defaultLength = 32;
+    this.loadSteps( attributes.levels || this.defaultLevels() );
 
-  Object.defineProperty( this, "numSteps", {
-    get: function () {
-      return this._numSteps;
-    },
-    set: function( n ) {
-      this._numSteps = n;
-      this.fullSequence = this.mapFullSequence();
-    }
-  });
+    this.numSteps    = attributes.steps || this.events.length;
+    this.stepsRange  = _.range( this.numSteps );
 
-  this.loadSteps( attributes.levels || this.defaultLevels() );
+    this.reset();
+  }
 
-  this.numSteps    = attributes.steps || this.events.length;
-  this.stepsRange  = _.range( this.numSteps );
+  get numSteps () {
+    return this._numSteps;
+  }
 
-  this.reset();
-};
+  set numSteps ( n ) {
+    this._numSteps = n;
+    this.fullSequence = this.mapFullSequence();
+  }
 
-_.extend( Sequence.prototype, {
-  next: function () {
+  next () {
     return this.advanceBy(1);
-  },
+  }
 
-  previous: function () {
+  previous () {
     return this.advanceBy(-1);
-  },
+  }
 
-  advanceBy: function ( n ) {
-    n = n || 1;
-
+  advanceBy ( n = 1 ) {
     this.currentStep = this.modIndex((this.currentStep + n), this.numSteps);
 
     return this.currentEvent();
-  },
+  }
 
-  seekTo: function ( n ) {
+  seekTo ( n ) {
     var diff = n - this.currentStep;
 
     return this.advanceBy(diff);
-  },
+  }
 
-  reset: function () {
+  reset () {
     this.currentStep = this.numSteps - 1;
-  },
+  }
 
   // Because writing out an array literal with 32
   // elements is boring (and error-prone).
-  defaultLevels: function () {
-    return _.map( _.range(this.defaultLength), function () {
-      return 0;
-    });
-  },
+  defaultLevels () {
+    return _.map( _.range(this.defaultLength), () => 0 );
+  }
 
-  mapLevels: function ( levels ) {
+  mapLevels ( levels ) {
     return _.map( _.range(this.defaultLength), function ( i ) {
       var level = levels[i] || 0;
       return new SequenceEvent({level: level});
     });
-  },
+  }
 
-  clear: function () {
+  clear () {
     this.loadSteps( this.defaultLevels() );
-  },
+  }
 
-  loadSteps: function ( steps ) {
+  loadSteps ( steps ) {
     this.events   = this.mapLevels( steps );
     this.numSteps = steps.length;
-  },
+  }
 
-  currentEvent: function () {
+  currentEvent () {
     return this.events[ this.currentStep ];
-  },
+  }
 
-  eventAt: function ( step ) {
+  eventAt ( step ) {
     var adjustedStep = step % this.numSteps;
 
     var event = this.events[ adjustedStep ];
@@ -87,24 +80,20 @@ _.extend( Sequence.prototype, {
     else {
       return event;
     }
-  },
+  }
 
-  mapFullSequence: function () {
-    return _.map( _.range(this.defaultLength), function ( i ) {
-      return this.eventAt(i);
-    }, this);
-  },
+  mapFullSequence () {
+    return _.map( _.range(this.defaultLength), ( i ) => this.eventAt(i) );
+  }
 
   // Workaround for JS incorrect handling of negative
   // wrapping with the % operator. Hat tip to:
   // http://javascript.about.com/od/problemsolving/a/modulobug.htm
-  modIndex: function ( index, max ) {
+  modIndex ( index, max ) {
     return ((index % max) + max) % max;
-  },
-
-  dump: function () {
-    return _.map( _.range(this.numSteps), function ( i ) {
-      return this.eventAt(i).level;
-    }, this);
   }
-});
+
+  dump () {
+    return _.map( _.range(this.numSteps), ( i ) => this.eventAt(i).level );
+  }
+}

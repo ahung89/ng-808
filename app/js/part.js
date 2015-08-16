@@ -1,48 +1,44 @@
-var Part = function ( attributes ) {
-  Object.defineProperties( this, {
-    currentStep: {
-      get: function () {
-        return this.sequence.currentStep;
-      }
-    }
-  });
+class Part {
+  constructor ( attributes = {} ) {
+    this.name       = attributes.name;
+    this.sampleName = attributes.sampleName;
+    this.sequence   = new Sequence();
 
-  this.name       = attributes.name;
-  this.sampleName = attributes.sampleName;
-  this.sequence   = new Sequence();
+    this.initAudio();
+    this.reset();
+  }
 
-  this.initAudio();
-  this.reset();
-};
+  get currentStep () {
+    return this.sequence.currentStep;
+  }
 
-_.extend( Part.prototype, {
-  advanceSequence: function ( by ) {
+  advanceSequence ( by ) {
     this.currentEvent = this.sequence.advanceBy( by );
-  },
+  }
 
-  seekTo: function ( n ) {
+  seekTo ( n ) {
     this.currentEvent = this.sequence.seekTo( n );
-  },
+  }
 
-  reset: function () {
+  reset () {
     this.sequence.reset();
     this.advanceSequence();
-  },
+  }
 
-  samplePath: function () {
+  samplePath () {
     return "samples/" + this.sampleName + ".wav";
-  },
+  }
 
-  initAudio: function () {
+  initAudio () {
     if ( this.sampleName ) {
       this.sample = new Wad({
         source: this.samplePath(),
         volume: 0.0
       });
     }
-  },
+  }
 
-  playEvent: function ( event ) {
+  playEvent ( event ) {
     if ( !this.sample ) { return; }
 
     if ( _.isUndefined(event) ) {
@@ -50,41 +46,44 @@ _.extend( Part.prototype, {
     }
 
     this.playSample( event.level );
-  },
+  }
 
-  playSample: function ( level ) {
+  playSample ( level ) {
     if ( level > 0 ) {
-      this.sample.play({volume: level, callback: _.bind(_.partial( this.activateVisualizer, level), this)});
+      this.sample.play({
+        volume: level,
+        callback: () => _.partial( this.activateVisualizer, level )
+      });
     }
-  },
+  }
 
-  activateVisualizer: function ( level ) {
+  activateVisualizer ( level ) {
     if ( this.sample.soundSource ) {
       this.bufferOscilloscope.connectStream( this.sample.soundSource );
       this.bufferOscilloscope.level =  level;
     }
-  },
+  }
 
-  loadSequence: function ( levels ) {
+  loadSequence ( levels ) {
     this.sequence.loadSteps( levels );
     this.loadCurrentEvent();
-  },
+  }
 
-  clearSequence: function () {
+  clearSequence () {
     this.sequence.clear();
     this.loadCurrentEvent();
-  },
+  }
 
-  loadCurrentEvent: function () {
+  loadCurrentEvent () {
     this.currentEvent = this.sequence.currentEvent();
-  },
+  }
 
-  dumpSequence: function () {
+  dumpSequence () {
     return this.sequence.dump();
-  },
+  }
 
-  setupBufferOscilloscope: function ( element ) {
+  setupBufferOscilloscope ( element ) {
     this.bufferOscilloscope = new BufferOscilloscope({element: element, sound: this.sample});
     this.bufferOscilloscope.draw();
   }
-});
+}

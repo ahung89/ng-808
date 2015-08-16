@@ -1,23 +1,20 @@
-var Clock = function ( attributes ) {
-  Object.defineProperties( this, {
-    swingPercent: {
-      get: function () {
-        return this.swing * 100;
-      },
-      set: function ( value ) {
-        this.swing = value / 100;
-      }
-    }
-  });
+class Clock {
+  constructor( attributes = {} ) {
+    this.tempo = attributes.tempo;
 
-  this.tempo = attributes.tempo;
+    this.minTempo = 10;
+    this.maxTempo = 240;
+  }
 
-  this.minTempo = 10;
-  this.maxTempo = 240;
-};
+  get swingPercent () {
+    return this.swing * 100;
+  }
 
-_.extend( Clock.prototype, {
-  stepLength: function (stepNum) {
+  set swingPercent ( value ) {
+    this.swing = value / 100;
+  }
+
+  stepLength (stepNum) {
     var straightLength = ((60 / this.tempo) * 1000) / 4;
 
     if ( !this.swing ) {
@@ -33,11 +30,11 @@ _.extend( Clock.prototype, {
         return straightLength + swingLength;
       }
     }
-  },
+  }
 
-  validTempo: function () {
+  validTempo () {
     return (typeof( this.tempo ) === "number") &&
       ( this.tempo >= this.minTempo )          &&
       ( this.tempo <= this.maxTempo );
   }
-});
+}
