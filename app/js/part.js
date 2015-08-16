@@ -45,7 +45,7 @@ _.extend( Part.prototype, {
   playEvent: function ( event ) {
     if ( !this.sample ) { return; }
 
-    if ( typeof(event) === "undefined" ) {
+    if ( _.isUndefined(event) ) {
       event = this.currentEvent;
     }
 
