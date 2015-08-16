@@ -1,6 +1,6 @@
 # NG-808
 
-![NG-808 preview](https://texel-monosnap.s3.amazonaws.com/ng-808_2015-08-16_11-37-29.png)
+![NG-808 preview](https://texel-monosnap.s3.amazonaws.com/NG-808_Preview.png)
 
 ### What is it?
 
