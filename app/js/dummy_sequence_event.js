@@ -1,14 +1,13 @@
-var DummySequenceEvent = function ( attributes ) {
-  this.originalEvent = attributes.originalEvent;
+class DummySequenceEvent {
+  constructor( attributes = {} ) {
+    this.originalEvent = attributes.originalEvent;
+  }
 
-  Object.defineProperties( this, {
-    level: {
-      get: function () {
-        return this.originalEvent.level;
-      },
-      set: function( level ) {
-        this.originalEvent.level = level;
-      }
-    }
-  });
-};
+  get level () {
+    return this.originalEvent.level;
+  }
+
+  set level ( level ) {
+    this.originalEvent.level = level;
+  }
+}
