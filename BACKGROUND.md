@@ -41,7 +41,7 @@ Right now, a `Part` can only have one `Sequence` - it might be cool to introduce
 
 Patterns can be changed on the fly, but there's still a bit of bugginess keeping track of the current time index. If that happens, hit the stop button twice to reset everything to 0, and it should work fine the next time you hit play.
 
-Velocity can be set arbitrarily (floating point values between `0.0` and `1.0`) but I made the conscious decision to limit it in the interface to `0.0`, `0.5`, and `1.0`. More of an old school drum machine feel that way. You can test out a hit at any volume by clicking anywhere in the part label in the left-most column - the higher you click, the louder the sound wil play.
+Velocity can be set arbitrarily (floating point values between `0.0` and `1.0`) but I made the conscious decision to limit it in the interface to `0.0`, `0.5`, and `1.0`. More of an old school drum machine feel that way. You can test out a hit at any volume by clicking anywhere in the part label in the left-most column - the higher you click, the louder the sound will play.
 
 #### Is your code tested? Why/why not? How would you test it (or better)?
 ---
