@@ -10,7 +10,7 @@ NG-808 is a drum machine written using Angular.js that runs in your browser.
 
 What can't it do! NG-808 can play back sequences up to 32 steps, and comes pre-loaded with some choice sequences courtesy of [Rob Ricketts](http://robricketts.bigcartel.com/). Unlike the original 808, each step also allows for 2 velocities, which is as many as any robot drummer should need. Individual parts can be looped in lengths of 2, 4, 8, 16 or 32 bars, thus making hat programming dead simple. Finally, taking further cues from the TR-909, the user can set a "swing" parameter, offering many new groove possibilities.
 
-### What browsers does it support?
+### Which browsers does it support?
 
 It was developed using the latest version of Chrome, so use that for best results. It sort of works in Firefox but it looks a bit strange and runs much more slowly. Do us both a favor and don't even attempt running it in IE.
 
