@@ -52,12 +52,13 @@ class Part {
     if ( level > 0 ) {
       this.sample.play({
         volume: level,
-        callback: () => _.partial( this.activateVisualizer, level )
+        callback: () => this.activateVisualizer( level )
       });
     }
   }
 
   activateVisualizer ( level ) {
+    console.log( "activating visualizer", this );
     if ( this.sample.soundSource ) {
       this.bufferOscilloscope.connectStream( this.sample.soundSource );
       this.bufferOscilloscope.level =  level;
