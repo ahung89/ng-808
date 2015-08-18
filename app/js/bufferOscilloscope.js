@@ -15,12 +15,12 @@ _.extend( BufferOscilloscope.prototype, {
       this.analyser     = this.audioContext.createAnalyser();
 
       this.analyser.fftSize = 1024;
-      this.bufferLength     = this.analyser.frequencyBinCount;
+      this.bufferLength     = this.analyser.fftSize;
 
       this.tickWidth        = this.width / 32;
       this.scaledBuffer     = new Uint8Array(this.width);
       this.dataArray        = new Uint8Array(this.bufferLength);
-      this.freqArray        = new Uint8Array(this.bufferLength);
+      this.freqArray        = new Uint8Array(this.analyser.frequencyBinCount);
 
       this.initBuffer( this.scaledBuffer, 128 );
     },
